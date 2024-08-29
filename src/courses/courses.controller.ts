@@ -12,44 +12,51 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { CoursesService } from './courses.service';
-import { CreateCourseDTO } from './DTO/create-course.dto';
-import { UpdateCourseDTO } from './DTO/update-course.dto';
+import { CreateCourseDTO } from './dto/create-course.dto';
+import { UpdateCourseDTO } from './dto/update-course.dto';
 
 @Controller('courses')
 export class CoursesController {
   constructor(private readonly couserService: CoursesService) {}
 
   @Get()
-  findAll(@Res() response: Response) {
-    return response.status(200).json({ data: this.couserService.findAll() });
+  async findAll(@Res() response: Response) {
+    const data = await this.couserService.findAll();
+
+    return response.status(200).json({ data });
   }
 
   @Get(':id')
-  getById(@Param('id') id: number, @Res() response: Response) {
-    return response.status(200).json({ data: this.couserService.getById(id) });
+  async getById(@Param('id') id: number, @Res() response: Response) {
+    const data = await this.couserService.getById(id);
+
+    return response.status(200).json({ data });
   }
 
   @Post()
-  create(@Body() createCourseDTO: CreateCourseDTO, @Res() response: Response) {
-    return response
-      .status(201)
-      .json({ data: this.couserService.create(createCourseDTO) });
+  async create(
+    @Body() createCourseDTO: CreateCourseDTO,
+    @Res() response: Response,
+  ) {
+    const data = await this.couserService.create(createCourseDTO);
+
+    return response.status(201).json({ data });
   }
 
   @Put(':id')
-  update(
+  async update(
     @Param('id') id: number,
     @Body() updateCourseDTO: UpdateCourseDTO,
     @Res() response: Response,
   ) {
-    return response
-      .status(200)
-      .json({ data: this.couserService.update(id, updateCourseDTO) });
+    const data = await this.couserService.update(id, updateCourseDTO);
+
+    return response.status(200).json({ data });
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    this.couserService.delete(id);
+  async delete(@Param('id') id: number) {
+    await this.couserService.delete(id);
   }
 }
