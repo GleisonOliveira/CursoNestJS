@@ -16,7 +16,7 @@ export class CoursesService {
     @InjectRepository(Tag) private readonly tagsRepository: Repository<Tag>,
   ) {}
 
-  private async findById(id: number) {
+  private async findById(id: string) {
     return await this.coursesRepository.findOne({
       where: { id },
       relations: this.relations,
@@ -34,7 +34,7 @@ export class CoursesService {
     });
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     const course = await this.findById(id);
 
     if (!course) {
@@ -53,7 +53,7 @@ export class CoursesService {
     return await this.coursesRepository.save(course);
   }
 
-  async update(id: number, { tags, ...updateCourseDTO }: UpdateCourseDTO) {
+  async update(id: string, { tags, ...updateCourseDTO }: UpdateCourseDTO) {
     const course = await this.coursesRepository.preload({
       ...updateCourseDTO,
       tags: await this.processTags(tags),
@@ -67,7 +67,7 @@ export class CoursesService {
     return await this.coursesRepository.save(course);
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const course = await this.findById(id);
 
     if (!course) {

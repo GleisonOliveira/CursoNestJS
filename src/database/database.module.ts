@@ -5,7 +5,6 @@ import { Tag } from 'src/courses/entities/tags.entity';
 import { DataSourceOptions } from 'typeorm';
 
 export const entities = [Course, Tag];
-
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -18,7 +17,7 @@ export const entities = [Course, Tag];
           password: process.env.TYPEORM_PASSWORD!,
           database: process.env.TYPEORM_DATABASE!,
           entities: entities,
-          synchronize: true,
+          synchronize: false,
         };
       },
     }),

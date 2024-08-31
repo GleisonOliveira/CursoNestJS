@@ -58,6 +58,22 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
+## Migrations
+```bash
+# Run
+npm run typeorm:run-migrations
+
+# Create
+npm run typeorm:generate-migration -- --name=MigrationName
+
+# Create empty
+npm run typeorm:create-migration -- --name=MigrationName
+
+# Revert
+npm run typeorm:revert-migration
+
+```
+
 ## Resources
 
 Check out a few resources that may come in handy when working with NestJS:

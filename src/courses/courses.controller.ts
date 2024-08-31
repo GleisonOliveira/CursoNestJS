@@ -27,7 +27,7 @@ export class CoursesController {
   }
 
   @Get(':id')
-  async getById(@Param('id') id: number, @Res() response: Response) {
+  async getById(@Param('id') id: string, @Res() response: Response) {
     const data = await this.couserService.getById(id);
 
     return response.status(200).json({ data });
@@ -45,7 +45,7 @@ export class CoursesController {
 
   @Put(':id')
   async update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateCourseDTO: UpdateCourseDTO,
     @Res() response: Response,
   ) {
@@ -56,7 +56,7 @@ export class CoursesController {
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  async delete(@Param('id') id: number) {
+  async delete(@Param('id') id: string) {
     await this.couserService.delete(id);
   }
 }

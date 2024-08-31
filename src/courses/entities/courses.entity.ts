@@ -1,24 +1,16 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { Tag } from './tags.entity';
+import { Entity as EntityBase } from './entity.base';
 
-@Entity('courses')
-export class Course {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+@Entity('course')
+export class Course extends EntityBase {
   @Column()
   name: string;
 
   @Column()
   description: string;
 
-  @JoinTable()
+  @JoinTable({ name: 'course_tag' })
   @ManyToMany(() => Tag, (tag) => tag.courses, { cascade: true })
   tags?: Tag[];
 }

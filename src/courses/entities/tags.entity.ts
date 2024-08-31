@@ -1,11 +1,9 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany } from 'typeorm';
 import { Course } from './courses.entity';
+import { Entity as EntityBase } from './entity.base';
 
-@Entity('tags')
-export class Tag {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+@Entity('tag')
+export class Tag extends EntityBase {
   @Column()
   name: string;
 
