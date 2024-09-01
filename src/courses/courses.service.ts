@@ -85,6 +85,7 @@ export class CoursesService {
     if (tag) {
       return tag;
     }
+
     return this.tagsRepository.create({ name });
   }
 
