@@ -5,6 +5,7 @@ import { Tag } from 'src/courses/entities/tags.entity';
 import { DataSourceOptions } from 'typeorm';
 
 export const entities = [Course, Tag];
+
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
